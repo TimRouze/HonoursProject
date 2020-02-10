@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">HonoursProject</string>
+    <string name="title_activity_home_page">Pain Records</string>
+
+    <string name="create_account">Create Account</string>
+    <string name="no_account">Don\'t have an account yet? Sign up now!</string>
+    <string name="sign_in">Sign in</string>
+    <string name="password_entry">Password</string>
+    <string name="email_entry">Email</string>
+    <string name="app_name_main_page">Manage my pain</string>
+    <string name="title_activity_main__page_">Main_Page_Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_profile">Profile</string>
+    <string name="menu_records">Pain records</string>
+    <string name="menu_statistics">Statistics</string>
+
+    <string name="add_still_in_pain">Are you still in pain?</string>
+    <string name="add_started_when">When did it started?</string>
+    <string name="add_stopped_when">When did it stopped?</string>
+    <string name="add_medicine">Did you take any medicine?</string>
+    <string name="add_effective">Was it effective?</string>
+    <string name="add_which_medicine">which medicine was it?</string>
+    <string name="add_relieve_pain">Have you done something to try to relieve the pain?</string>
+    <string name="add_what_tried">What did you try?</string>
+    <string name="add_other_thing">What was it?</string>
+    <string name="add_what_pain_worse">What did make your pain worse?</string>
+    <string name="add_type_pain">Select the adjective(s) that best describe your pain (Multiple adjectives can be selected).</string>
+    <string name="add_aching">Aching</string>
+    <string name="add_throbbing">Throbbing</string>
+    <string name="add_shooting">Shooting</string>
+    <string name="add_Stabbing">Stabbing</string>
+    <string name="add_gnawing">Gnawing</string>
+    <string name="add_sharp">Sharp</string>
+    <string name="add_tender">Tender</string>
+    <string name="add_burning">Burning</string>
+    <string name="add_exhausting">Exhausting</string>
+    <string name="add_tiring">Tiring</string>
+    <string name="add_penetrating">Penetrating</string>
+    <string name="add_nagging">Nagging</string>
+    <string name="add_numb">Numb</string>
+    <string name="add_miserable">Miserable</string>
+    <string name="add_unbearable">Unbearable</string>
+    <string name="add_yes">yes</string>
+    <string name="add_no">no</string>
+    <string name="btn_date">Date</string>
+    <string name="btn_time">Time</string>
+    <string name="btn_next">Next</string>
+
+    <string name="sliders_main">State how much your pain interfered with your activities (0 being no interference and 100 being a total interferance).</string>
+    <string name="sliders_general_activity">General Activity</string>
+    <string name="sliders_mood">Mood</string>
+    <string name="sliders_walking">Walking ability</string>
+    <string name="sliders_work">Normal work (housework and outside work)</string>
+    <string name="sliders_social">Social relations</string>
+    <string name="sliders_sleep">Sleep</string>
+    <string name="sliders_life_enjoyment">Life enjoyment</string>
+
+    <string-array name="things_tried_array">
+        <item>Walk</item>
+        <item>Heat</item>
+        <item>Cold</item>
+        <item>Rest</item>
+        <item>Stay in the dark</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="things_worse_array">
+        <item>Walking</item>
+        <item>Standing</item>
+        <item>Lifting</item>
+        <item>Reading</item>
+        <item>Other</item>
+    </string-array>
+
+</resources>
