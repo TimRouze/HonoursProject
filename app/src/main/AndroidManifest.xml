@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".painIndicatorActivity"></activity>
+        <activity android:name=".AddSimplePainRecordActivity"></activity>
+        <activity android:name=".PainIndicatorActivity" />
         <activity android:name=".AddRecordSlidersActivity" />
         <activity android:name=".AddPainRecordActivity" />
         <activity

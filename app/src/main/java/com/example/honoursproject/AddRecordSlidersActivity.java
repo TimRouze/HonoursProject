@@ -118,7 +118,7 @@ public class AddRecordSlidersActivity extends AppCompatActivity implements SeekB
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_next_sliders:
-                startActivity(new Intent(AddRecordSlidersActivity.this, AddRecordSlidersActivity.class));
+                startActivity(new Intent(AddRecordSlidersActivity.this, PainIndicatorActivity.class));
                 break;
         }
     }

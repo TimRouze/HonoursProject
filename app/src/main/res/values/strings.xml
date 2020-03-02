@@ -50,11 +50,13 @@
     <string name="add_unbearable">Unbearable</string>
     <string name="add_yes">yes</string>
     <string name="add_no">no</string>
+
     <string name="btn_date">Date</string>
     <string name="btn_time">Time</string>
     <string name="btn_next">Next</string>
+    <string name="btn_end">Add record</string>
 
-    <string name="sliders_main">State how much your pain interfered with your activities (0 being no interference and 100 being a total interferance).</string>
+    <string name="sliders_main">State how much your pain interfered with your activities (0 being no interference and 100 being a total interference).</string>
     <string name="sliders_general_activity">General Activity</string>
     <string name="sliders_mood">Mood</string>
     <string name="sliders_walking">Walking ability</string>
@@ -62,6 +64,11 @@
     <string name="sliders_social">Social relations</string>
     <string name="sliders_sleep">Sleep</string>
     <string name="sliders_life_enjoyment">Life enjoyment</string>
+
+    <string name="max_pain_slider_text">State the level of pain you felt at MAXIMUM during the pain episode (0 being very low pain and 10 being unsustainable pain).</string>
+    <string name="min_pain_slider_text">State the level of pain you felt at MINIMUM during the pain episode (0 being very low pain and 10 being unsustainable pain).</string>
+    <string name="avg_pain_slider_text">State the level of pain you felt at AVERAGE during the pain episode (0 being very low pain and 10 being unsustainable pain).</string>
+
 
     <string-array name="things_tried_array">
         <item>Walk</item>
@@ -79,5 +86,19 @@
         <item>Reading</item>
         <item>Other</item>
     </string-array>
+
+    <array name="pain_imgs_array">
+        <item>@drawable/pain_0</item>
+        <item>@drawable/pain_1</item>
+        <item>@drawable/pain_2</item>
+        <item>@drawable/pain_3</item>
+        <item>@drawable/pain_4</item>
+        <item>@drawable/pain_5</item>
+        <item>@drawable/pain_6</item>
+        <item>@drawable/pain_7</item>
+        <item>@drawable/pain_8</item>
+        <item>@drawable/pain_9</item>
+        <item>@drawable/pain_10</item>
+    </array>
 
 </resources>
