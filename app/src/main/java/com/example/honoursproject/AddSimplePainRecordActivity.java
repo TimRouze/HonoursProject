@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.honoursproject.Model.SimplifiedPainRecord;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,6 +42,7 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
     private TextView seekerTextView;
     private int maxPain, minPain, avgPain, state;
     private boolean stillInPain = false;
+    private DatabaseReference mDatabase;
 
 
     @Override
@@ -75,6 +78,8 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
         imageList = getApplicationContext().getResources().obtainTypedArray(R.array.pain_imgs_array);
         seekerTextView = findViewById(R.id.painSliderText);
         state = 0;
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -199,6 +204,8 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
                                         Date startDate = df.parse(startDateString);
                                         Date endDate = df.parse(endDateString);
                                         painRecord = new SimplifiedPainRecord(minPain, maxPain, avgPain, startDate, endDate, "head");
+                                        mDatabase.child("simple_pain_records").setValue(painRecord);
+
                                         Intent response = new Intent(AddSimplePainRecordActivity.this, MainPageActivity.class);
                                         response.putExtra("PainRecord", painRecord);
                                         setResult(RESULT_OK, response);
