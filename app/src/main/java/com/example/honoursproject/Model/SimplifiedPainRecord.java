@@ -1,5 +1,8 @@
 package com.example.honoursproject.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,15 +11,15 @@ public class SimplifiedPainRecord implements Serializable {
         private Integer minPainLevel;
         private Integer maxPainLevel;
         private Integer avgPainLevel;
-        private Date startDate;
-        private Date endDate;
+        private String startDate;
+        private String endDate;
         private String painLocation;
 
 
         public SimplifiedPainRecord(){
 
         }
-        public SimplifiedPainRecord(String id, Integer minPainLevel, Integer maxPainLevel, Integer avgPainLevel, Date sDate, Date eDate, String pLoc) {
+        public SimplifiedPainRecord(String id, Integer minPainLevel, Integer maxPainLevel, Integer avgPainLevel, String sDate, String eDate, String pLoc) {
             this.id = id;
             this.minPainLevel = minPainLevel;
             this.maxPainLevel = maxPainLevel;
@@ -26,12 +29,12 @@ public class SimplifiedPainRecord implements Serializable {
                 endDate = eDate;
             }
             else{
-                endDate = new Date();
+                endDate = "";
             }
             painLocation = pLoc;
         }
 
-    public SimplifiedPainRecord(Integer minPainLevel, Integer maxPainLevel, Integer avgPainLevel, Date sDate, Date eDate, String pLoc) {
+    public SimplifiedPainRecord(Integer minPainLevel, Integer maxPainLevel, Integer avgPainLevel, String sDate, String eDate, String pLoc) {
         this.minPainLevel = minPainLevel;
         this.maxPainLevel = maxPainLevel;
         this.avgPainLevel = avgPainLevel;
@@ -40,7 +43,7 @@ public class SimplifiedPainRecord implements Serializable {
             endDate = eDate;
         }
         else{
-            endDate = new Date();
+            endDate = "";
         }
         painLocation = pLoc;
     }
@@ -69,19 +72,19 @@ public class SimplifiedPainRecord implements Serializable {
         this.avgPainLevel = avgPainLevel;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -105,4 +108,6 @@ public class SimplifiedPainRecord implements Serializable {
         public String toString() {
             return "Simplified Pain Record";
         }
+
+
 }

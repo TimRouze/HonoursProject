@@ -42,7 +42,6 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
     private TextView seekerTextView;
     private int maxPain, minPain, avgPain, state;
     private boolean stillInPain = false;
-    private DatabaseReference mDatabase;
 
 
     @Override
@@ -78,8 +77,6 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
         imageList = getApplicationContext().getResources().obtainTypedArray(R.array.pain_imgs_array);
         seekerTextView = findViewById(R.id.painSliderText);
         state = 0;
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -199,20 +196,12 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
                                 public void onClick(DialogInterface dialog, int which) {
                                     String startDateString = startYear + "-" + startMonth + "-" + startDay + " " + startHour + ":" + startMinute;
                                     String endDateString = endYear + "-" + endMonth + "-" + endDay + " " + endHour + ":" + endMinute;
-                                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                                    try{
-                                        Date startDate = df.parse(startDateString);
-                                        Date endDate = df.parse(endDateString);
-                                        painRecord = new SimplifiedPainRecord(minPain, maxPain, avgPain, startDate, endDate, "head");
-                                        mDatabase.child("simple_pain_records").setValue(painRecord);
+                                    painRecord = new SimplifiedPainRecord(minPain, maxPain, avgPain, startDateString, endDateString, "head");
 
-                                        Intent response = new Intent(AddSimplePainRecordActivity.this, MainPageActivity.class);
-                                        response.putExtra("PainRecord", painRecord);
-                                        setResult(RESULT_OK, response);
-                                        finish();
-                                    }catch(ParseException pe){
-                                        System.err.println(pe);
-                                    }
+                                    Intent response = new Intent(AddSimplePainRecordActivity.this, MainPageActivity.class);
+                                    response.putExtra("PainRecord", painRecord);
+                                    setResult(RESULT_OK, response);
+                                    finish();
                                     state = 0;
                                 }
                             })
