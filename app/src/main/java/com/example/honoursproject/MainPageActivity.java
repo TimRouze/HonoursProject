@@ -6,11 +6,9 @@ import android.os.Bundle;
 import com.example.honoursproject.Model.SimplifiedPainRecord;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -18,7 +16,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,7 +47,8 @@ public class MainPageActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private SimplePainRecordAdapter mAdapter;
     private DatabaseReference mReference;
-    private FirebaseDatabase database;
+    private FirebaseDatabase mDatabase;
+    private FirebaseUser mUser;
 
     String elementName = "SimpleRecord";
     int nbElements;
@@ -84,8 +84,9 @@ public class MainPageActivity extends AppCompatActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        database = FirebaseDatabase.getInstance();
-        mReference = database.getReference("simplePainRecord");
+        mDatabase = FirebaseDatabase.getInstance();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mReference = mDatabase.getReference(mUser.getUid()).child("simplePainRecords");
 
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -96,7 +97,7 @@ public class MainPageActivity extends AppCompatActivity
                     System.out.println();
                     simplePainRecordList.add(value);
                     mAdapter.notifyDataSetChanged();
-                    
+
                 }
             }
             @Override
