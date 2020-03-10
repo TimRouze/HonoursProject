@@ -21,6 +21,7 @@
     <string name="menu_profile">Profile</string>
     <string name="menu_records">Pain records</string>
     <string name="menu_statistics">Statistics</string>
+    <string name="menu_disconnect">Disconnect</string>
 
     <string name="add_still_in_pain">Are you still in pain?</string>
     <string name="add_started_when">When did it started?</string>
