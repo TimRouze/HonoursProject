@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.honoursproject.Model.SimplifiedPainRecord;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -189,7 +190,7 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
                     avgPain = painSeekBar.getProgress();
                     painSeekBar.setProgress(0);
                     painImageView.setImageResource(imageList.getResourceId(0, 0));
-                    new AlertDialog.Builder(AddSimplePainRecordActivity.this)
+                    new MaterialAlertDialogBuilder(AddSimplePainRecordActivity.this)
                             .setTitle("Add pain entry")
                             .setMessage("Are you sure you want to add this pain record?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
