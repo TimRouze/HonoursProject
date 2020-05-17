@@ -18,4 +18,11 @@
             android:title="@string/menu_statistics" />
     </group>
 
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_disconnect"
+            android:icon="@android:drawable/ic_lock_lock"
+            android:title="@string/menu_disconnect"/>
+    </group>
+
 </menu>

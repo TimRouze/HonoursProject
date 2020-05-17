@@ -1,5 +1,6 @@
 package com.example.honoursproject;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -9,29 +10,37 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.honoursproject.Model.SimplifiedPainRecord;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
-public class AddSimplePainRecordActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener{
+public class AddSimplePainRecordActivity extends AppCompatActivity implements View.OnClickListener, SwitchMaterial.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener{
 
     private Calendar calendar;
-    private RadioGroup radioStillPainGrp;
+    private SwitchMaterial stillPainSwitch;
     private Button startDateBtn, endDateBtn, startTimeBtn, endTimeBtn, nextSeekerBtn;
     private int year, month, day, hour, minute, startYear, startMonth, startDay, startHour, startMinute, endYear, endMonth, endDay, endHour, endMinute;
     private LinearLayout endDateLayout;
@@ -41,8 +50,7 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
     private TypedArray imageList;
     private TextView seekerTextView;
     private int maxPain, minPain, avgPain, state;
-    private boolean stillInPain = false;
-    private DatabaseReference mDatabase;
+    private final int ADD_SIMPLE_RECORD_CODE = 12;
 
 
     @Override
@@ -69,8 +77,8 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
 
         endDateLayout = findViewById(R.id.endDateLayout);
 
-        radioStillPainGrp = findViewById(R.id.stillPainRadioGrp);
-        radioStillPainGrp.setOnCheckedChangeListener(this);
+        stillPainSwitch = findViewById(R.id.stillPainSwitch);
+        stillPainSwitch.setOnCheckedChangeListener(this);
 
         painSeekBar = findViewById(R.id.painSeekBar);
         painSeekBar.setOnSeekBarChangeListener(this);
@@ -79,7 +87,11 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
         seekerTextView = findViewById(R.id.painSliderText);
         state = 0;
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        String callingFrom = getIntent().getStringExtra("from");
+        if(callingFrom != null)
+        {
+            getRecord(getIntent());
+        }
     }
 
     @Override
@@ -87,159 +99,158 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
         final Calendar c = Calendar.getInstance();
         DatePickerDialog datePickerDialog;
         TimePickerDialog timePickerDialog;
-        switch(v.getId()){
-            case R.id.selectStartDateButton:
-                year = c.get(Calendar.YEAR);
-                month = c.get(Calendar.MONTH);
-                day = c.get(Calendar.DAY_OF_MONTH);
+        if(v.getId() == R.id.selectStartDateButton) {
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
 
 
-                datePickerDialog = new DatePickerDialog(this,
-                        new DatePickerDialog.OnDateSetListener() {
+            datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
 
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
 
-                                startYear = year;
-                                startMonth = monthOfYear;
-                                startDay = dayOfMonth;
-                                startDateBtn.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            startYear = year;
+                            startMonth = monthOfYear;
+                            startDay = dayOfMonth;
+                            startDateBtn.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-                            }
-                        }, year, month, day);
-                datePickerDialog.show();
-                break;
+                        }
+                    }, year, month, day);
+            datePickerDialog.show();
+        }
 
-            case R.id.selectStartTimeButton:
-                hour = c.get(Calendar.HOUR_OF_DAY);
-                minute = c.get(Calendar.MINUTE);
+        else if(v.getId() == R.id.selectStartTimeButton) {
+            hour = c.get(Calendar.HOUR_OF_DAY);
+            minute = c.get(Calendar.MINUTE);
 
-                // Launch Time Picker Dialog
-                timePickerDialog = new TimePickerDialog(this,
-                        new TimePickerDialog.OnTimeSetListener() {
+            // Launch Time Picker Dialog
+            timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
 
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-                                startHour = hourOfDay;
-                                startMinute = minute;
-                                startTimeBtn.setText(hourOfDay + ":" + minute);
-                            }
-                        }, hour, minute, false);
-                timePickerDialog.show();
-                break;
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+                            startHour = hourOfDay;
+                            startMinute = minute;
+                            startTimeBtn.setText(hourOfDay + ":" + minute);
+                        }
+                    }, hour, minute, false);
+            timePickerDialog.show();
+        }
 
-            case R.id.selectEndTimeButton:
-                hour = c.get(Calendar.HOUR_OF_DAY);
-                minute = c.get(Calendar.MINUTE);
+        else if(v.getId() == R.id.selectEndTimeButton) {
+            hour = c.get(Calendar.HOUR_OF_DAY);
+            minute = c.get(Calendar.MINUTE);
 
-                // Launch Time Picker Dialog
-                timePickerDialog = new TimePickerDialog(this,
-                        new TimePickerDialog.OnTimeSetListener() {
+            // Launch Time Picker Dialog
+            timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
 
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-                                endHour = hourOfDay;
-                                endMinute = minute;
-                                endTimeBtn.setText(hourOfDay + ":" + minute);
-                            }
-                        }, hour, minute, false);
-                timePickerDialog.show();
-                break;
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+                            endHour = hourOfDay;
+                            endMinute = minute;
+                            endTimeBtn.setText(hourOfDay + ":" + minute);
+                        }
+                    }, hour, minute, false);
+            timePickerDialog.show();
+        }
 
-            case R.id.selectEndDateButton:
-                year = c.get(Calendar.YEAR);
-                month = c.get(Calendar.MONTH);
-                day = c.get(Calendar.DAY_OF_MONTH);
+        else if(v.getId() == R.id.selectEndDateButton) {
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
 
 
-                datePickerDialog = new DatePickerDialog(this,
-                        new DatePickerDialog.OnDateSetListener() {
+            datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
 
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
 
-                                endYear = year;
-                                endMonth = monthOfYear;
-                                endDay = dayOfMonth;
-                                endDateBtn.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            endYear = year;
+                            endMonth = monthOfYear;
+                            endDay = dayOfMonth;
+                            endDateBtn.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-                            }
-                        }, year, month, day);
-                datePickerDialog.show();
-                break;
+                        }
+                    }, year, month, day);
+            datePickerDialog.show();
+        }
 
-            case R.id.nextSeekerBtn:
-                if(state == 0){
-                    maxPain = painSeekBar.getProgress();
-                    painSeekBar.setProgress(0);
-                    painImageView.setImageResource(imageList.getResourceId(0, 0));
-                    seekerTextView.setText(R.string.min_pain_slider_text);
-                    state++;
+        else if(v.getId() == R.id.nextSeekerBtn) {
+            if (state == 0) {
+                if(painSeekBar.getProgress() == 0){
+                    Toast.makeText(getApplicationContext(), "Maximum pain can't be equal to 0.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                else if(state == 1){
-                    minPain = painSeekBar.getProgress();
-                    painSeekBar.setProgress(0);
-                    painImageView.setImageResource(imageList.getResourceId(0, 0));
-                    seekerTextView.setText(R.string.avg_pain_slider_text);
-                    nextSeekerBtn.setText(R.string.btn_end);
-                    state++;
+                maxPain = painSeekBar.getProgress();
+                painSeekBar.setProgress(0);
+                painImageView.setImageResource(imageList.getResourceId(0, 0));
+                seekerTextView.setText(R.string.min_pain_slider_text);
+                state++;
+            } else if (state == 1) {
+                minPain = painSeekBar.getProgress();
+                painSeekBar.setProgress(0);
+                painImageView.setImageResource(imageList.getResourceId(0, 0));
+                seekerTextView.setText(R.string.avg_pain_slider_text);
+                state++;
+            } else if (state == 2) {
+                if(painSeekBar.getProgress() == 0){
+                    Toast.makeText(getApplicationContext(), "Average pain can't be equal to 0.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                else if(state == 2){
-                    avgPain = painSeekBar.getProgress();
-                    painSeekBar.setProgress(0);
-                    painImageView.setImageResource(imageList.getResourceId(0, 0));
-                    new AlertDialog.Builder(AddSimplePainRecordActivity.this)
-                            .setTitle("Add pain entry")
-                            .setMessage("Are you sure you want to add this pain record?")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    String startDateString = startYear + "-" + startMonth + "-" + startDay + " " + startHour + ":" + startMinute;
-                                    String endDateString = endYear + "-" + endMonth + "-" + endDay + " " + endHour + ":" + endMinute;
-                                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                                    try{
-                                        Date startDate = df.parse(startDateString);
-                                        Date endDate = df.parse(endDateString);
-                                        painRecord = new SimplifiedPainRecord(minPain, maxPain, avgPain, startDate, endDate, "head");
-                                        mDatabase.child("simple_pain_records").setValue(painRecord);
+                String startDateString = startYear + "-" + startMonth + "-" + startDay + " " + startHour + ":" + startMinute;
+                String endDateString = endYear + "-" + endMonth + "-" + endDay + " " + endHour + ":" + endMinute;
+                if(startDateString.equalsIgnoreCase("0-0-0 0:0") || endDateString.equalsIgnoreCase("0-0-0 0:0") ||
+                startHour == 0 || endHour == 0 || startYear == 0 || endYear == 0){
+                    Toast.makeText(getApplicationContext(), "Please enter values for the dates AND times.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                avgPain = painSeekBar.getProgress();
+                painSeekBar.setProgress(0);
+                painImageView.setImageResource(imageList.getResourceId(0, 0));
+                state = 0;
+                painRecord = new SimplifiedPainRecord(minPain, maxPain, avgPain, startDateString, endDateString);
+                Intent intent = new Intent(AddSimplePainRecordActivity.this, BodyPartsActivity.class);
+                intent.putExtra("PainRecord", painRecord);
+                intent.putExtra("painList", getIntent().getSerializableExtra("painList"));
+                startActivity(intent);
+                finish();
+            }
+        }
+    }
 
-                                        Intent response = new Intent(AddSimplePainRecordActivity.this, MainPageActivity.class);
-                                        response.putExtra("PainRecord", painRecord);
-                                        setResult(RESULT_OK, response);
-                                        finish();
-                                    }catch(ParseException pe){
-                                        System.err.println(pe);
-                                    }
-                                    state = 0;
-                                }
-                            })
-                            .setNegativeButton(android.R.string.no, null)
-                            .show();
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case ADD_SIMPLE_RECORD_CODE:
+                if(resultCode == RESULT_OK){
+                    System.err.println("HELLO");
+                    SimplifiedPainRecord record = (SimplifiedPainRecord)data.getSerializableExtra("PainRecord");
+                    Intent response = new Intent(AddSimplePainRecordActivity.this, MainPageActivity.class);
+                    response.putExtra("PainRecord", record);
+                    setResult(RESULT_OK, response);
+                    finish();
                 }
                 break;
         }
     }
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch(group.getId()){
-            case R.id.stillPainRadioGrp:
-                switch(checkedId)
-                {
-                    case R.id.yesStillPainRadio:
-                        endDateLayout.setVisibility(View.GONE);
-                        stillInPain = false;
-                        break;
-                    case R.id.noStillPainRadio:
-                        endDateLayout.setVisibility(View.VISIBLE);
-                        stillInPain = true;
-                        break;
-                }
-                break;
+    private void getRecord(Intent intent){
+        painRecord = (SimplifiedPainRecord)intent.getSerializableExtra("PainRecord");
+        if(painRecord != null) {
+            System.err.println("hellooooooo");
+            Intent response = new Intent(AddSimplePainRecordActivity.this, MainPageActivity.class);
+            response.putExtra("PainRecord", painRecord);
+            setResult(RESULT_OK, response);
+            finish();
         }
     }
 
@@ -256,5 +267,17 @@ public class AddSimplePainRecordActivity extends AppCompatActivity implements Vi
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(!isChecked){
+            endDateLayout.setVisibility(View.VISIBLE);
+            return;
+        }
+        else{
+            endDateLayout.setVisibility(View.GONE);
+            return;
+        }
     }
 }

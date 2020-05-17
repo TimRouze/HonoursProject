@@ -2,22 +2,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.honoursproject">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".AddSimplePainRecordActivity"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".PieChartActivity"></activity>
+        <activity android:name=".LineChartActivity" />
+        <activity android:name=".BodyPartsActivity" />
+        <activity
+            android:name=".StatPageActivity"
+            android:label="@string/title_activity_stat_page"/>
+        <activity android:name=".PainRecordDetailActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".AddSimplePainRecordActivity" />
         <activity android:name=".PainIndicatorActivity" />
         <activity android:name=".AddRecordSlidersActivity" />
         <activity android:name=".AddPainRecordActivity" />
         <activity
             android:name=".MainPageActivity"
-            android:label="@string/title_activity_main__page_"
-            android:theme="@style/NoActionBar" />
-        <activity android:name=".MainActivity">
+            android:label="@string/title_activity_main_page" />
+        <activity android:name=".LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

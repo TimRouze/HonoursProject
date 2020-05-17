@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="app_name">HonoursProject</string>
+    <string name="app_name">Manage My Pain</string>
     <string name="title_activity_home_page">Pain Records</string>
 
+    <!-- Main activity -->
     <string name="create_account">Create Account</string>
     <string name="no_account">Don\'t have an account yet? Sign up now!</string>
     <string name="sign_in">Sign in</string>
     <string name="password_entry">Password</string>
     <string name="email_entry">Email</string>
     <string name="app_name_main_page">Manage my pain</string>
-    <string name="title_activity_main__page_">Main_Page_Activity</string>
+
+    <!-- Main page Activity -->
+    <string name="title_activity_main_page">Manage my pain</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Manage my pain</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="menu_profile">Profile</string>
     <string name="menu_records">Pain records</string>
     <string name="menu_statistics">Statistics</string>
+    <string name="menu_disconnect">Disconnect</string>
 
+    <!-- Add pain record activity + related activities -->
+    <string name="title_activity_add_record">Add new Record</string>
+    <string name="add_text">Please enter the information regarding your pain episode.</string>
     <string name="add_still_in_pain">Are you still in pain?</string>
     <string name="add_started_when">When did it started?</string>
     <string name="add_stopped_when">When did it stopped?</string>
@@ -65,10 +70,28 @@
     <string name="sliders_sleep">Sleep</string>
     <string name="sliders_life_enjoyment">Life enjoyment</string>
 
-    <string name="max_pain_slider_text">State the level of pain you felt at MAXIMUM during the pain episode (0 being very low pain and 10 being unsustainable pain).</string>
-    <string name="min_pain_slider_text">State the level of pain you felt at MINIMUM during the pain episode (0 being very low pain and 10 being unsustainable pain).</string>
-    <string name="avg_pain_slider_text">State the level of pain you felt at AVERAGE during the pain episode (0 being very low pain and 10 being unsustainable pain).</string>
+    <string name="max_pain_slider_text">State the level of pain you felt at <u><b>MAXIMUM</b></u> during the pain episode</string>
+    <string name="min_pain_slider_text">State the level of pain you felt at <u><b>MINIMUM</b></u> during the pain episode</string>
+    <string name="avg_pain_slider_text">State the level of pain you felt at <u><b>AVERAGE</b></u> during the pain episode</string>
+    <string name="pain_slider_text">(0 being very low pain and 10 being unsustainable pain).</string>
+    <string name="body_parts_text">Select the body parts where your pain occured during the pain episode. (You can select multiple ones).</string>
 
+    <!-- Register Activity -->
+    <string name="new_account_text">Create your new account to start managing your pain</string>
+    <string name="new_email_edit">Email</string>
+    <string name="new_pass_edit">Password</string>
+    <string name="new_username_edit">Name</string>
+    <string name="create_account_btn">Register</string>
+
+    <!-- Statistics Activity -->
+    <string name="title_activity_stat_page">Statistics</string>
+    <string name="avg_pain_duration_text">Avg pain duration: </string>
+    <string name="pain_freq_text">Pain episodes frequency: </string>
+    <string name="avg_pain_all_time_text">Avg pain all time: </string>
+    <string name="pain_levels_btn">Pain levels</string>
+    <string name="pain_loc_btn">Pain location</string>
+    <string name="csv_upload_btn">Get CSV file</string>
+    <string name="csv_mail_btn">Get CSV file by Email</string>
 
     <string-array name="things_tried_array">
         <item>Walk</item>
@@ -87,6 +110,7 @@
         <item>Other</item>
     </string-array>
 
+    <!-- Item list for pain sliders -->
     <array name="pain_imgs_array">
         <item>@drawable/pain_0</item>
         <item>@drawable/pain_1</item>
@@ -100,5 +124,8 @@
         <item>@drawable/pain_9</item>
         <item>@drawable/pain_10</item>
     </array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

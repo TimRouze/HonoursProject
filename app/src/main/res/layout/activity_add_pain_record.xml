@@ -59,14 +59,14 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/selectStartDateButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/btn_date" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/selectStartTimeButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,14 +92,14 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/selectEndDateButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/btn_date" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/selectEndTimeButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -353,7 +353,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/add_unbearable" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/nextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

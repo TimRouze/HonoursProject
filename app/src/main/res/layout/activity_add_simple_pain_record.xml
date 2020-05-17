@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,39 +9,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:context=".AddSimplePainRecordActivity"
         android:orientation="vertical">
 
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/stillPainSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_still_in_pain"
+            android:checked="true"
+            android:textSize="20sp"
+            android:visibility="gone"/>
+
         <TextView
-            android:id="@+id/stillInPainText"
+            android:id="@+id/addText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="@string/add_still_in_pain" />
-
-        <RadioGroup
-            android:id="@+id/stillPainRadioGrp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/yesStillPainRadio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/add_yes" />
-
-            <RadioButton
-                android:id="@+id/noStillPainRadio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/add_no" />
-
-        </RadioGroup>
+            android:text="@string/add_text" />
 
         <TextView
             android:id="@+id/startedWhenText"
@@ -54,14 +39,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/selectStartDateButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/btn_date" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/selectStartTimeButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,8 +58,7 @@
             android:id="@+id/endDateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/endedWhenText"
@@ -87,14 +71,14 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/selectEndDateButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/btn_date" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/selectEndTimeButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -112,6 +96,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/max_pain_slider_text" />
+            <TextView
+                android:id="@+id/painSliderText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pain_slider_text"/>
 
             <ImageView
                 android:id="@+id/painImageView"
@@ -135,12 +124,14 @@
                 android:progress="0"
                 android:layout_weight="0.5"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/nextSeekerBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_next"/>
+                android:layout_marginTop="25dp"
+                android:text="@string/btn_next"
+                android:layout_gravity="bottom"/>
         </LinearLayout>
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
