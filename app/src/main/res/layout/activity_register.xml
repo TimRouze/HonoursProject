@@ -40,7 +40,7 @@
         android:layout_marginBottom="25dp"
         android:hint="@string/new_username_edit"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/registerBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -46,7 +46,9 @@ public class LogInActivity extends AppCompatActivity implements Button.OnClickLi
         FirebaseUser mUser = mAuth.getCurrentUser();
         if(mUser != null){
             finish();
+            overridePendingTransition(0, 0);
             startActivity(new Intent(LogInActivity.this, MainPageActivity.class));
+            overridePendingTransition(0, 0);
         }
     }
 

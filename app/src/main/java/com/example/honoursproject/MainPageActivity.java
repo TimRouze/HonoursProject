@@ -1,9 +1,11 @@
 package com.example.honoursproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.honoursproject.Model.SimplifiedPainRecord;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.util.Log;
@@ -33,6 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -64,9 +67,12 @@ public class MainPageActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(MainPageActivity.this, AddSimplePainRecordActivity.class), ADD_SIMPLE_RECORD_CODE);
+                Intent intent = new Intent(MainPageActivity.this, AddSimplePainRecordActivity.class);
+                intent.putExtra("painList", (Serializable)simplePainRecordList);
+                startActivity(intent);
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -76,7 +82,23 @@ public class MainPageActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.pain_records_recycler_view);
+        recyclerView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                new MaterialAlertDialogBuilder(MainPageActivity.this)
+                        .setTitle("Modify pain entry")
+                        .setMessage("Do you want to modify this pain record?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .show();
+                return false;
+            }
+        });
+        //feghbihbfce
         mAdapter = new SimplePainRecordAdapter(simplePainRecordList);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -106,6 +128,7 @@ public class MainPageActivity extends AppCompatActivity
             }
         });
 
+        Toast.makeText(getApplicationContext(), "Retrieving Data...", Toast.LENGTH_LONG).show();
         nbElements = 0;
     }
 
@@ -142,13 +165,19 @@ public class MainPageActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
+            Toast.makeText(MainPageActivity.this, "Not supported yet", Toast.LENGTH_SHORT);
 
         } else if (id == R.id.nav_records) {
 
         } else if (id == R.id.nav_statistics) {
+            Intent intent = new Intent(MainPageActivity.this, StatPageActivity.class);
+            intent.putExtra("painList", (Serializable)simplePainRecordList);
+            startActivity(intent);
 
         } else if (id == R.id.nav_disconnect){
-            
+            FirebaseAuth.getInstance().signOut();
+            finish();
+            startActivity(new Intent(MainPageActivity.this, LogInActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -176,4 +205,6 @@ public class MainPageActivity extends AppCompatActivity
                 break;
         }
     }
+
+
 }

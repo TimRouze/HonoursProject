@@ -12,7 +12,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/pain_loc_text"
+        android:id="@+id/date_text"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -20,7 +20,37 @@
         android:id="@+id/avg_pain_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pain_loc_text"/>
+        android:layout_below="@+id/date_text"/>
+
+    <LinearLayout
+        android:id="@+id/linear_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/avg_pain_text"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pain_loc_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/min_pain_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/max_pain_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/end_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

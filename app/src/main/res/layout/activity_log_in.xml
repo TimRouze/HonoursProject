@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="@string/app_name_main_page"
@@ -30,6 +30,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
+        android:textColor="@color/secondaryTextColor"
         android:inputType="textEmailAddress"
         android:hint="@string/email_entry" />
 
@@ -46,7 +47,7 @@
         android:inputType="textPassword"
         android:hint="@string/password_entry" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,7 +70,7 @@
         android:text="@string/no_account"
         android:textSize="16sp"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/createAccountButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
